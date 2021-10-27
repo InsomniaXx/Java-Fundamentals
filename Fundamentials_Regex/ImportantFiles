@@ -1,0 +1,91 @@
+[0-9]+ matches non-empty sequence of digits
+
+[A-Z][a-z]* matches a capital + small letters
+
+[A-Z][a-z]+ [A-Z][a-z]+
+John Smith
+
+[nvj] matches any character that is either n, v or j
+
+[^abc] - matches any character that is not a, b or c
+
+[0-9] - character range matches any digit from 0 to 9
+
+\w - matches any word character (a-z, A-Z, 0-9, _)
+
+\W - matches any non-word character (the opposite of \w)
+
+\s - matches any white-space character
+
+\S - matches any non-white-space  character (opposite of \s)
+
+\d - matches any decimal digit (0-9)
+
+\D - matches any non-decimal character (the opposite of \d)
+
+* - matches the previous element zero or more times
+\+\d*
+
++ - matches the previous element one or more times
+\+\d+
+
+? - matches the previous element zero or one time
+\+\d?
+
+{3} - matches the previous element exactly 3 times
+\+\d{3}
+
+\d{2,} -> Two or more digits
+\d{2,4} -> Between two or 4 digits
+
+Match Double Numbers
+[0-9]\.[0-9]
+
+(subexpression) - captures the matched subexpression as numbered group
+\d{2}-(\w{3})-\d{4} -> 22-Jan-2015
+
+(?:subexpression) - defines a non-capturing group
+^(?:Hi|hello),\s*(\w+)$ -> Hi, Peter // hello, Peter
+
+(?<name>subexpression) - defines a named capturing group
+(?<day>\d{2})-(?<month>\w{3})-(?<year>\d{4}) -> 22-Jan-2015
+
+Regex In java
+
+-> Pattern -> Hold the regex
+-> Matcher -> Hold the string to compare
+
+boolean match = matcher.find();
+String matchText = matcher.group();
+
+Pattern pattern = Pattern.compile("a*b");
+Matcher matcher = pattern.matcher("aaaab");
+
+boolean match = matcher.find();
+String matchText = matcher.group();
+
+String text = "Andy: 123";
+String pattern = "([A-Z][a-z]+): (?<number>\\d+)";
+
+Pattern regex = Pattern.compile(pattern);
+Matcher matcher = regex.matcher(text);
+
+System.out.println(matcher.find());          // true
+System.out.println(matcher.group());         // Andy: 123
+System.out.println(matcher.group(0));        // Andy: 123
+System.out.println(matcher.group(1));        // Andy
+System.out.println(matcher.group(2));        // 123
+System.out.println(matcher.group("number")); // 123
+
+String regex = "[A-Za-z]+";
+String string = "Hello Java";
+Pattern pattern = Pattern.compile(regex);
+Matcher matcher = pattern.matcher(string);
+String res = matcher.replaceAll("hi");    // hi hi
+String res2 = matcher.replaceFirst("hi"); // hi Java
+
+String text = "1   2 3      4";
+String pattern = "\\s+";
+
+String[] tokens = text.split(pattern);
+
